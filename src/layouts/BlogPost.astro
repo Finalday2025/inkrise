@@ -2,7 +2,6 @@
 import type { CollectionEntry } from 'astro:content';
 type Props = { post: CollectionEntry<'blog'> };
 const { post } = Astro.props;
-const { Content } = await post.render();
 ---
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -13,6 +12,6 @@ const { Content } = await post.render();
 <body style="max-width:900px;margin: 2rem auto;padding:0 1rem;">
   <h1>{post.data.title}</h1>
   <p>发布时间：{post.data.pubDate.toLocaleDateString()}</p>
-  <Content />
+  <post.render />
 </body>
 </html>
