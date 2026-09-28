@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+const blogPosts = await getCollection('blog');
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>InkRise | Java笔记</title>
+  <style>
+    .card{border:1px solid #eee;border-radius:12px;padding:16px;margin:12px 0;}
+    a{text-decoration:none;color:#2563eb;}
+  </style>
+</head>
+<body style="max-width:900px;margin: 2rem auto;padding:0 1rem;">
+  <h1>InkRise</h1>
+  <p>Java学习笔记 | Java21 / SpringBoot / AI</p>
+  <div>
+    {blogPosts.map(post => (
+      <div class="card">
+        <h2><a href={`/posts/${post.slug}`}>{post.data.title}</a></h2>
+        <p>{post.data.pubDate.toLocaleDateString()}</p>
+        <div>
+          {post.data.tags.map(tag => <span style="background:#efefef;padding:3px 6px;border-radius:4px;margin-right:4px;">{tag}</span>)}
+        </div>
+      </div>
+    ))}
+  </div>
+</body>
+</html>
